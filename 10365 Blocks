@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+   int T;
+   cin>>T;
+   while(T--){
+   int n;
+   cin>>n;
+   int minarea=1e9;
+   for(int i=1;i<=n;i++)
+   {
+       for(int j=1;j*j<=n;j++)
+       {
+           int high=n/(i*j);
+           if(high*i*j==n&&n%(i*j)==0&&n%high==0)
+           {
+               int area=2*i*j+2*i*high+2*j*high;
+               minarea=min(minarea,area);
+           }
+       }
+   }
+   cout<<minarea<<endl;
+   }
+    return 0;
+}
