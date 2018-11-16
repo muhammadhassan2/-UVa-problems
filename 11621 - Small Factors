@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+// brute force
+using namespace std;
+typedef unsigned long long ll;
+ll pow (int i,int j)
+{
+    ll ans=1;
+    for(int k=0;k<j;k++)
+    {
+        ans*=i;
+    }
+    return ans;
+}
+int main()
+{
+ll n;
+while(cin>>n&&n){
+bool p=1;
+ll ans =1000000000000000000;
+for(int i=0;i<=32;i++)
+{
+    //ll y=0;
+    for(int j=0;j<=20;j++)
+    {
+        ll y=pow(2,i)*pow(3,j);
+        if(y>=n){ans=min(y,ans);}
+
+
+    }
+}
+cout<<ans<<endl;
+
+}
+    return 0;
+}
