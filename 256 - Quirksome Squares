@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+bool check(int i,int n)
+{
+    string t;
+    int r=n/2,w=i,q=0,j=1,a=0;
+    while(r)
+    {
+        q+=(w%10)*j;
+        j*=10;
+        r--;
+        w/=10;
+    }
+        if(w*w+q*q+2*q*w==i)return true;
+        else return false;
+}
+int main()
+{
+int n;
+while(cin>>n)
+{
+  for(int i=0;i<100000000;i++)
+  {
+      int c=0;
+      int y=i;
+      while(y)
+      {
+          c++;
+          y/=10;
+      }
+      if(c>n)break;
+      if(check(i,n))
+      {
+          for(int i=0;i<(n-c);i++)cout<<0;
+          if(i!=0)cout<<i;
+          cout<<endl;
+      }
+  }
+
+
+}
+    return 0;
+}
