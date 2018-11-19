@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll poww(ll a,ll b)
+{
+    ll ans=1;
+    for(int i=0;i<b;i++)ans*=a;
+    return ans;
+}
+struct st{
+int a,b;
+};
+vector<ll>v;
+void pr()
+{
+    for(int i=0;i<=32;i++)
+    {
+        for(int j=0;j<=16;j++)
+        {
+            for(int k=0;k<=21;k++)
+            {
+                for(int m=0;m<=15;m++)
+                {
+                    ll y=poww(2,i)*poww(5,j)*poww(3,k)*poww(7,m);
+                    if(y>0&&y<=2000000000)v.push_back(y);
+                }
+            }
+        }
+    }
+
+}
+int main()
+{
+pr();
+int c=1;
+sort(v.begin(),v.end());
+unique(v.begin(),v.end());
+int n;
+while(cin>>n&&n)
+{
+string ss;
+if (n % 100 == 11 || n % 100 == 12 || n % 100 == 13) ss = "th";
+        else if (n % 10 == 1) ss = "st";
+        else if (n % 10 == 2) ss = "nd";
+        else if (n % 10 == 3) ss = "rd";
+        else ss = "th";
+                cout << "The " << n << ss << " humble number is " << v[n-1] << ".\n";
+}
+
+    return 0;
+}
