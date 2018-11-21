@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int n;
+int col[8],vis[100],val[8][8];
+int ma=0;
+bool ch(int r,int c)
+{
+    for(int i=0;i<c;i++)
+    {
+        if(col[i]==r||(abs(i-c)==abs(r-col[i])))return false;
+    }
+    return true;
+}
+
+void pr(int nu)
+{
+if(nu==8)
+{
+    int c=0;
+    for(int i=0;i<8;i++)c+=val[i][col[i]];
+    ma=max(ma,c);
+
+        //cout<<col[i]<<" ";
+
+   // cout<<endl;
+    return ;
+
+}
+for(int row=0;row<8;row++)
+{
+    if(!vis[row])
+    {
+
+        if(ch(row,nu))
+        {
+            vis[row]=1;
+            col[nu]=row;
+            pr(nu+1);
+            vis[row]=0;
+       }
+
+
+    }
+
+
+}
+
+
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--){
+        memset(vis,0,sizeof vis);
+for(int i=0;i<8;i++)col[i]=-100;
+for(int i=0;i<8;i++)
+    for(int j=0;j<8;j++)cin>>val[i][j];
+pr(0);
+cout<<setw(5)<<ma<<endl;
+ma=0;
+
+}
+    return 0;
+}
