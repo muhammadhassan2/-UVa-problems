@@ -1,0 +1,40 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const double EPS = (1e-6);
+int x[11]={5,10,20,50,100,200,500,1000,2000,5000,10000};
+int n;
+ll c2=0;
+ll dp[12][30005];
+void ways()
+{
+   for(int i=0;i<=11;i++)
+   {
+       dp[i][0]=1;
+   }
+   for(int i=5;i<=30005;i+=5)
+   {
+
+       for(int j=0;j<11;j++)
+       {
+       if(x[j]<=i)dp[j][i]=dp[j][i-x[j]];
+       if(j)dp[j][i]+=dp[j-1][i];
+       }
+
+   }
+
+}
+int main()
+{
+
+
+double d;
+ways();
+ while (scanf("%lf", &d) && abs(d) > EPS) {
+        int rem = d * 100 + EPS;
+        ll e=dp[10][rem];
+        printf("%6.2f%17lld\n", d,e);
+    }
+    return 0;
+}
