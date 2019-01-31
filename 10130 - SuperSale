@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+ll dp[1005][105];
+void knap(int p[],int w[],int n,int g)
+{
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=30;j++)
+        {
+            if(j<w[i])dp[i][j]=dp[i-1][j];
+                else dp[i][j]=max(dp[i-1][j],p[i]+dp[i-1][j-w[i]]);
+
+        }
+    }
+
+}
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        ll n,c=0,g;
+        cin>>n;
+        int p[n+1],w[n+1];
+        for(int i=1;i<=n;i++)
+        {
+            cin>>p[i]>>w[i];
+
+
+        }
+        cin>>g;
+                knap(p,w,n,g);
+
+        for(int i=0;i<g;i++)
+        {
+            int a;
+            cin>>a;
+            c+=dp[n][a];
+        }
+    cout<<c<<endl;
+
+
+    //    cout<<dp[n][20];
+
+    }
+
+
+    return 0;
+}
