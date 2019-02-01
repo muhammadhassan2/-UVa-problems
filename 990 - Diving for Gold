@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+ll dp[35][1005];
+void knap(int we[],int v[],int n,int t)
+{
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=0;j<=t;j++)
+        {
+
+            if(j<we[i])dp[i][j]=dp[i-1][j];
+            else dp[i][j]=max(dp[i-1][j],dp[i-1][j-we[i]]+v[i]);
+        }
+    }
+
+
+}
+
+int main()
+{
+    ll t,w,End=0;
+    while(cin>>t>>w)
+    {
+        memset(dp,0,sizeof dp);
+        int n;
+        cin>>n;
+        int we[n+1],v[n+1],ww[n+1];
+        for(int i=1;i<=n;i++)
+        {
+            int d;
+            cin>>d>>v[i];
+            ww[i]=d;
+            we[i]=(3*d*w);
+        }
+        if (End) cout << endl; End=1;
+
+        knap(we,v,n,t);
+        cout<<dp[n][t]<<endl;
+        vector<pair<int,int>>vv;
+    int i=n,j=t;
+    while(i>0)
+    {
+        if(dp[i][j]!=dp[i-1][j])
+        {
+           // cout<<ww[i]<<" "<<v[i]<<endl;
+            vv.push_back(make_pair(ww[i],v[i]));
+
+            j-=we[i];
+
+        }
+        i--;
+
+
+
+    }
+    cout<<vv.size()<<endl;
+    for(int i=vv.size()-1;i>=0;i--)
+    {
+        cout<<vv[i].first<<" "<<vv[i].second<<endl;
+    }
+    }
+    return 0;
+}
