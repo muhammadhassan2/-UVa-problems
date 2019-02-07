@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int x[250];
+ll dp[50][15];
+ll mo(int i,int j)
+{
+    return ((i%j)+j)%j;
+}
+ll k,n,m,d;
+ll dpp[205][25][25];
+ll sum(ll nu,ll mu,ll dd)
+{
+   if(mu==0&&dd==0)
+   {
+       return 1;
+   }
+   else if(mu==0&&dd!=0)return 0;
+      if(nu==n)return 0;
+ll &t=dpp[nu][mu][dd];
+   if(t!=-1)return t;
+  ll c1=sum(nu+1,mu,dd);
+   ll c2=sum(nu+1,mu-1,mo(dd+x[nu],d));
+   return t=c1+c2;
+}
+
+int main()
+{
+int c=0;
+    while(cin>>n>>k&&n&&k)
+    {
+memset(x,0,sizeof x);
+      for(int i=0;i<n;i++){cin>>x[i];
+      }
+  
+         cout<<"SET "<<++c<<":"<<endl;
+
+      for(int i=0;i<k;i++)
+      {
+        
+          cin>>d>>m;
+          memset(dpp,-1,sizeof dpp);
+     
+          ll aa=sum(0,m,0);
+      cout<<"QUERY "<<i+1<<": "<<aa<<endl;
+
+      }
+
+    }
+    return 0;
+}
+/*
+5 3
+1 2 -9 28 3
+
+*/
