@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+int x[50],ii=1,sum;
+void str(string s)
+{
+    stringstream ss;
+    ss<<s;
+    int f;
+    while((ss>>f))
+    {
+        x[ii]=f;
+        sum+=f;
+        ii++;
+    }
+
+}
+bool p=0;
+int dp[25][250];
+void num()
+{
+dp[0][0]=1;
+for(int i=0;i<ii;i++)dp[i][0]=1;
+for(int i=1;i<ii;i++)
+{
+    for(int j=sum/2;j>=x[i];j--)
+    {
+            dp[i][j]=dp[i-1][j];
+         dp[i][j]+=dp[i-1][j-x[i]];
+         if(dp[i][j]&&j==sum/2)p=1;
+    }
+
+}
+
+}
+int main() {
+int t;
+cin>>t;
+string r;
+    getline(cin,r);
+while(t--)
+{
+    string s;
+    //getline(cin,s);
+    getline(cin,s);
+    memset(dp,0,sizeof dp);
+    str(s);
+  if(sum%2==0)num();
+    if(sum%2==0&&p){
+    cout<<"YES"<<endl;
+    }
+    else cout<<"NO"<<endl;
+      ii=1;
+    sum=0;
+    p=0;
+
+}
+ return 0;
+}
