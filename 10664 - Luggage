@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+int x[50],i,sum;
+void str(string s)
+{
+    stringstream ss;
+    ss<<s;
+    int f;
+    while((ss>>f))
+    {
+        x[i]=f;
+        sum+=f;
+        i++;
+    }
+
+}
+bool p=0;
+void num(int j,int s)
+{
+    if(j==i)
+    {
+     if(s==sum/2&&s*2==sum)p=1;
+     return ;
+    }
+    num(j+1,s);
+    num(j+1,s+x[j]);
+
+}
+int main() {
+int t;
+cin>>t;
+string r;
+    getline(cin,r);
+while(t--)
+{
+    string s;
+    //getline(cin,s);
+    getline(cin,s);
+    str(s);
+    num(0,0);
+   if(p)cout<<"YES"<<endl;
+   else cout<<"NO"<<endl;
+    i=0;
+    sum=0;
+    p=0;
+  //  for(int i=0;i<5;i++)cout<<x[i]<<endl;
+}
+
+
+ return 0;
+}
