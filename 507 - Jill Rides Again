@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+int main()
+{
+int t,c=0;
+cin>>t;
+while(t--)
+{
+    int n,sum=0,ans=0;
+    cin>>n;
+    int x[n+1];
+    for(int i=1;i<=n-1;i++)
+    {
+        cin>>x[i];
+        sum+=x[i];
+        ans=max(ans,sum);
+        if(sum<=0)sum=0;
+    }
+    sum=0;
+    int s=1,e=0,dis=0,st=0,en=0;
+    for(int i=1;i<=n-1;i++)
+    {
+       sum+=x[i];
+       if(sum<0){sum=0;s=i+1;}
+       if(sum==ans)
+       {
+           if((i-s+1)>dis)
+           {
+               dis=(i)-s+1;
+              st=s;
+               e=i;
+           }
+        //   cout<<s<<" "<<e<<endl;
+       }
+    }
+    if(ans>0)printf("The nicest part of route %d is between stops %d and %d\n",++c,st,e+1);
+    else printf("Route %d has no nice parts\n",++c);
+   // cout<<ans<<" "<<s<<" "<<e<<endl;
+}
+        return 0;
+}
