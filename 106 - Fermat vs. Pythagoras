@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+vector<ll>v;
+int q[1000007];
+//map<int,int>mp;
+int main()
+{
+// We will need to find another relationship that generates the Pythagorean triples that will allow us to generate all pairs easily.
+//Assume that you have two numbers, r, and s. (for now, assume they're given) Then this equation is true:
+// (r^2-s^2)^2+(2*r*s)^2=(r^2+s^2)^2
+// s ,r <=sqrt(n)
+   int n,x=0,w=0;
+   while(cin>>n){
+        for(int i=0;i<=n;i++)q[i]=0;
+        x=0,w=0;
+        int sq=sqrt(n);
+   for(int i=1;i<=sq;i++)
+   {
+       for(int j=i+1;j<=sq;j++)
+       {
+        if(__gcd(i+j,j-i)==1){
+           int a=(j*j-i*i);
+           int b=(2*i*j);
+           int c=(i*i+j*j);
+           if(c<=n){
+                  x++;
+            int k=1;
+            while(k*c<=n){
+              
+             q[k*c]=q[k*a]=q[k*b]=1;
+                k++;
+            }
+           }
+       }
+   }
+   }
+  for(int i=1;i<=n;i++)if(q[i])w++;
+   cout<<x<<" "<<n-w<<endl;
+
+   }
+    return 0;
+}
