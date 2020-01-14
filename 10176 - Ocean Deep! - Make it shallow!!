@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+vector<vector<int>>v(100001),vv(100001);
+typedef long long ll;
+
+
+int main()
+{
+   // char ch;
+    string ch,s;
+ while(getline(cin,ch)){
+    int a=131071;
+    s+=ch;
+    if(s[s.size()-1]=='#'){
+    int r=0,e=1;
+    for(int i=s.size()-2;i>=0;i--)
+    {
+        if(s[i]=='1')r+=e;
+        e*=2;
+       r%=a;
+       e%=a;
+    }
+   if(r==0)cout<<"YES"<<endl;
+   else cout<<"NO"<<endl;
+   s="";
+    }
+ }
+
+    return 0;
+}
