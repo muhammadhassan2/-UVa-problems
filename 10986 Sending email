@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+#define ss second
+#define ff first
+vector<vector<pair<ll,ll>>>v(100005);
+ll cost[100007],vis[100007];
+void dij(int s)
+{
+    for(int i=0;i<=100005;i++)cost[i]=10000000000;
+    priority_queue<pair<ll,ll>>q;
+    q.push(make_pair(0,s));
+    cost[s]=0;
+    while(!q.empty())
+    {
+    //pair<ll,ll>p=q.top();
+    //ll a=-p.first,b=p.second;
+    ll b=q.top().second;
+    q.pop();
+    if(vis[b])continue;
+    vis[b]=1;
+    for(auto i:v[b])
+    {
+        if(cost[b]+i.second<=cost[i.first])
+        {
+            cost[i.first]=cost[b]+i.second;
+            q.push(make_pair(-cost[i.first],i.first));
+        }
+    }
+
+
+    }
+}
+int main()
+{
+int T,c=0;
+cin>>T;
+while(T--)
+{
+    int n,m,s,t;
+  //  cin>>n>>m;
+   cin>>n>>m>>s>>t;
+    for(int i=0;i<100000;i++)
+    {
+        v[i].clear();
+       // cost[i]=0;
+        vis[i]=0;
+    }
+    for(int i=0;i<m;i++)
+    {
+        int a,b,c;
+        cin>>a>>b>>c;
+        v[a].push_back(make_pair(b,c));
+        v[b].push_back(make_pair(a,c));
+    }
+
+    dij(s);
+    //cout<<cost[25];
+    cout<<"Case #"<<++c<<": ";
+    if(cost[t]==10000000000)cout<<"unreachable"<<endl;
+    else cout<<cost[t]<<endl;
+   //if(T)cout<<endl;
+    //cout<<cost[t];
+}
+
+
+    return 0;
+}
