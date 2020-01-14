@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+pair<int,pair<int,int>>p[1000];
+vector<vector<pair<int,int>>>v(1000);
+vector<vector<int>>vv(1000);
+int pa[1000];
+int dsu(int n)
+{
+    if(pa[n]==n)return n;
+    else return pa[n]=dsu(pa[n]);
+}
+int cost[1000],ma;
+void bfs(int n)
+{
+    queue<int>q;
+    q.push(n);
+    cost[n]=0;
+    while(!q.empty())
+    {
+        int t=q.front();
+        q.pop();
+        for(auto i:v[t])
+        {
+    if(!cost[i.first]){
+        ma=max(ma,i.second);
+        vv[i.first].push_back(i.second);
+            cost[i.first]=max(cost[t],i.second);
+       q.push(i.first);
+    }
+        }
+    }
+}
+int main()
+{
+    int m,n,q,C=0;
+    while(cin>>n>>m>>q){
+            if(n==0&&m==0&&q==0)break;
+    for(int i=0;i<1000;i++)
+    {
+     v[i].clear();
+     cost[i]=0;
+
+        pa[i]=i;
+    }
+    for(int i=0;i<m;i++)
+    {
+        int a,b,c;
+        cin>>a>>b>>c;
+        p[i]=make_pair(c,make_pair(a,b));
+    }
+    sort(p,p+m);
+    int c=0;
+    for(int i=0;i<m;i++)
+    {
+        int a1=dsu(p[i].second.first);
+        int b1=dsu(p[i].second.second);
+        if(pa[a1]!=pa[b1])
+        {
+            v[p[i].second.first].push_back(make_pair(p[i].second.second,p[i].first));
+            v[p[i].second.second].push_back(make_pair(p[i].second.first,p[i].first));
+            a1=dsu(a1);
+            b1=dsu(b1);
+            pa[b1]=a1;
+            c+=p[i].first;
+
+        }
+    }
+    if(C)cout<<endl;
+    cout<<"Case #"<<++C<<endl;
+    for(int i=0;i<q;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+        memset(cost,0,sizeof cost);
+        bfs(a);
+      if(cost[b])  cout<<cost[b]<<endl;
+      else if(!cost[b])cout<<"no path"<<endl;
+    }
+  //  puts("");
+    }
+    return 0;
+}
