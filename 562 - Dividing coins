@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n,m,ans,s;
+const int r=11;
+int x[150],y[150];
+int dp[105][50005];
+int knap(int i,int v)
+{
+    if(i==n)return abs(v-(s-v));
+    int dif=1e9;
+    if(dp[i][v]!=-1)return dp[i][v];
+    int c1=knap(i+1,v);
+    int c2=knap(i+1,v+y[i]);
+    return dp[i][v]=min(c1,c2);
+}
+int main() {
+int T;
+cin>>T;
+while(T--)
+{
+    cin>>n;
+    s=0;
+    memset(dp,-1,sizeof dp);
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        y[i]=a;
+        s+=a;
+    }
+    cout<<knap(0,0)<<endl;
+}
+}
